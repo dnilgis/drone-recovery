@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # --- CONFIGURATION ---
-INPUT_FILE = "final_leads_geocoded.csv" # The one you just geocoded
+INPUT_FILE = "final_leads_geocoded.csv"
 OUTPUT_FILE = "final_leads_tagged.csv"
 
 def run_tagger():
@@ -10,72 +10,74 @@ def run_tagger():
         print(f"ERROR: Could not find {INPUT_FILE}")
         return
 
-    print("--- STARTING AUTO-TAGGER ---")
+    print("--- STARTING SMART TAGGER (V2) ---")
     df = pd.read_csv(INPUT_FILE)
     
-    # Ensure columns exist
-    if 'Industry' not in df.columns:
-        df['Industry'] = ''
-    
-    # fill NaN with empty string to avoid errors
-    df['Industry'] = df['Industry'].fillna('')
-    df['Equipment_Details'] = df['Equipment_Details'].fillna('')
-    df['Name'] = df['Name'].fillna('')
-    df['RegistrantType'] = df['RegistrantType'].fillna('')
+    # Ensure columns exist and handle NaNs
+    cols_to_clean = ['Industry', 'Equipment_Details', 'Name', 'RegistrantType', 'Deer_Recovery', 'Pet_Recovery']
+    for col in cols_to_clean:
+        if col not in df.columns: df[col] = ''
+        df[col] = df[col].fillna('').astype(str)
 
     def get_tags(row):
-        # Start with existing industry
-        tags = [str(row['Industry'])]
+        # 1. Start with any existing tags (cleaned)
+        existing = row['Industry'].replace(';', ',').split(',')
+        tags = [t.strip() for t in existing if t.strip()]
         
-        # 1. DEER RECOVERY (From 'Deer_Recovery' column)
-        if str(row.get('Deer_Recovery', '')).lower() == 'yes':
-            tags.append("Deer Recovery")
-            
-        # 2. PET RECOVERY (From 'Pet_Recovery' column)
-        if str(row.get('Pet_Recovery', '')).lower() == 'yes':
-            tags.append("Pet Recovery")
-
-        # 3. GOVERNMENT (From Name or RegistrantType)
+        # Prepare data for checking
         name_lower = row['Name'].lower()
-        reg_type = str(row['RegistrantType']).lower()
-        govt_keywords = ['police', 'sheriff', 'fire dept', 'city of', 'county of', 'department of', 'public safety', 'state of']
-        
-        if reg_type == 'government' or any(k in name_lower for k in govt_keywords):
-            tags.append("Government")
-            tags.append("Public Safety")
+        equip_upper = row['Equipment_Details'].upper()
+        reg_type_lower = row['RegistrantType'].lower()
 
-        # 4. DEFENSE (From Name)
-        defense_keywords = ['defense', 'aerospace', 'tactical', 'systems', 'solutions', 'lockheed', 'northrop', 'raytheon']
-        if any(k in name_lower for k in defense_keywords):
-            tags.append("Defense")
-
-        # 5. THERMAL / INSPECTION (From Equipment)
-        # Scan fleet for thermal cameras
-        equip = str(row['Equipment_Details']).upper()
-        thermal_gear = ['3T', '30T', 'H20T', 'XT2', 'XT', 'THERMAL', 'MAVIC 2 ENTERPRISE DUAL', 'M2EA', 'AUTEL EVO II DUAL']
+        # --- RULE 1: AGRICULTURE (The Strongest Indicator) ---
+        # If they fly crop sprayers, they are Ag. Period.
+        ag_drones = ['AGRAS', 'T40', 'T30', 'T10', 'T20', 'T50', 'XAG', 'H520', 'SPRAY']
+        ag_keywords = ['ag ', 'farm', 'crop', 'agriculture', 'spraying', 'aerial application']
         
-        if any(gear in equip for gear in thermal_gear):
+        is_ag = False
+        if any(d in equip_upper for d in ag_drones) or any(k in name_lower for k in ag_keywords):
+            tags.append("Agriculture")
+            is_ag = True
+
+        # --- RULE 2: THERMAL / INSPECTION ---
+        thermal_drones = ['3T', '30T', 'H20T', 'XT2', 'XT', 'THERMAL', 'MAVIC 2 ENTERPRISE', 'M2EA', 'AUTEL EVO II DUAL', 'M30T']
+        if any(d in equip_upper for d in thermal_drones) or 'thermal' in name_lower:
             tags.append("Thermal")
             tags.append("Inspection")
-            
-        # 6. AGRICULTURE (From Equipment or Name)
-        ag_gear = ['AGRAS', 'T40', 'T30', 'T10', 'T20', 'SPRAY']
-        if any(gear in equip for gear in ag_gear) or 'ag ' in name_lower or 'farm' in name_lower:
-            tags.append("Agriculture")
 
-        # Clean up tags: Join them unique, comma separated
-        # e.g. "Agriculture, Thermal, Deer Recovery"
-        unique_tags = list(set([t.strip() for t in tags if t.strip()]))
+        # --- RULE 3: GOVERNMENT / PUBLIC SAFETY ---
+        govt_keywords = ['police', 'sheriff', 'fire dept', 'city of', 'county of', 'department of', 'public safety', 'state of', 'university', 'college']
+        if reg_type_lower == 'government' or any(k in name_lower for k in govt_keywords):
+            tags.append("Government")
+            if 'university' not in name_lower and 'college' not in name_lower:
+                tags.append("Public Safety")
+
+        # --- RULE 4: DEFENSE (Strict Mode) ---
+        # Only tag Defense if it's NOT Ag, and has specific keywords
+        # Removed "Systems", "Solutions", "Tactical" to prevent false positives
+        defense_keywords = ['defense', 'aerospace', 'lockheed', 'northrop', 'raytheon', 'boeing', 'general atomics', 'l3harris']
+        
+        if not is_ag: # Farmers are rarely Defense contractors
+            if any(k in name_lower for k in defense_keywords):
+                tags.append("Defense")
+
+        # --- RULE 5: RECOVERY (From Columns) ---
+        if row['Deer_Recovery'].lower() == 'yes': tags.append("Deer Recovery")
+        if row['Pet_Recovery'].lower() == 'yes': tags.append("Pet Recovery")
+
+        # Clean up: Unique tags only, title case
+        unique_tags = list(set(tags))
+        # Remove 'Other' or 'Pending' if we found better tags
+        if len(unique_tags) > 1 and 'Other' in unique_tags: unique_tags.remove('Other')
+        
         return ", ".join(unique_tags)
 
-    # Apply the logic
-    print("Scanning fleet data and assigning tags...")
+    print("Retagging pilots with strict logic...")
     df['Industry'] = df.apply(get_tags, axis=1)
 
-    # Save
     df.to_csv(OUTPUT_FILE, index=False)
-    print(f"SUCCESS: Tagged {len(df)} pilots. Saved to {OUTPUT_FILE}")
-    print("Next: Rename this file to 'final_leads_geocoded.csv' and run build_site.py")
+    print(f"SUCCESS: Retagged {len(df)} pilots. Saved to {OUTPUT_FILE}")
+    print("Now: Rename this file to 'final_leads_geocoded.csv' and run build_site.py")
 
 if __name__ == "__main__":
     run_tagger()
