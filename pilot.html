@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Drone Pilot Profile | US Drone Map</title>
+    <meta name="description" content="View drone pilot profile and contact information on US Drone Map.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://usdronemap.com/pilot.html">
+    
+    <!-- Open Graph (will be updated by JS) -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:url" content="https://usdronemap.com/pilot.html">
+    <meta property="og:title" content="Drone Pilot Profile | US Drone Map">
+    <meta property="og:description" content="View drone pilot profile and services.">
+    <meta property="og:image" content="https://usdronemap.com/og-image.png">
+    <meta property="og:site_name" content="US Drone Map">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Drone Pilot Profile | US Drone Map">
+    <meta name="twitter:description" content="View drone pilot profile and services.">
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23f97316'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- JSON-LD placeholder - will be populated dynamically -->
+    <script type="application/ld+json" id="schema-jsonld">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Drone Pilot",
+        "description": "Professional drone services"
+    }
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 14px 24px;
+        }
+        .header-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .logo span { color: #f97316; }
+        nav { display: flex; gap: 8px; }
+        nav a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: #1a1a1a; background: #f5f5f5; }
+        .nav-cta {
+            background: #f97316 !important;
+            color: white !important;
+        }
+        .nav-cta:hover { background: #ea580c !important; }
+        
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            flex: 1;
+            width: 100%;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+        .back-link:hover { color: #f97316; }
+        .back-link svg { width: 16px; height: 16px; }
+        
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e5e5e5;
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            padding: 32px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .profile-title {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .profile-name {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+        .verified-badge {
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: #f97316;
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .unverified-badge {
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: #f5f5f5;
+            color: #666;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        /* View Counter */
+        .profile-stats {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            color: #666;
+        }
+        .stat-item svg {
+            width: 16px;
+            height: 16px;
+            color: #999;
+        }
+        .stat-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .stat-item.verified-only {
+            display: none;
+        }
+        .profile-card.is-verified .stat-item.verified-only {
+            display: flex;
+        }
+        .profile-location {
+            font-size: 1.1rem;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .profile-location svg { width: 18px; height: 18px; color: #999; }
+        .profile-industry {
+            display: inline-block;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            background: #f5f5f5;
+            color: #555;
+            border-radius: 6px;
+        }
+        
+        .profile-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        
+        .contact-section {
+            padding: 32px;
+            border-right: 1px solid #e5e5e5;
+        }
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .contact-item:last-child { border-bottom: none; }
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #fff7ed;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f97316;
+            flex-shrink: 0;
+        }
+        .contact-icon svg { width: 20px; height: 20px; }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        .contact-value {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+        }
+        .contact-value a {
+            color: #f97316;
+            text-decoration: none;
+        }
+        .contact-value a:hover { text-decoration: underline; }
+        
+        .no-contact {
+            color: #999;
+            font-size: 0.9rem;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        /* Click to reveal contact */
+        .reveal-contact-section {
+            background: #fff7ed;
+            border: 1px dashed #f97316;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+        .reveal-contact-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .reveal-contact-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .reveal-contact-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #f97316;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .reveal-contact-btn:hover { background: #ea580c; }
+        
+        .equipment-section {
+            padding: 32px;
+        }
+        .equipment-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .equipment-item:last-child { border-bottom: none; }
+        .equipment-icon {
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            flex-shrink: 0;
+        }
+        .equipment-icon svg { width: 20px; height: 20px; }
+        .equipment-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        .equipment-value {
+            font-size: 0.95rem;
+            color: #1a1a1a;
+        }
+        
+        .map-section {
+            border-top: 1px solid #e5e5e5;
+        }
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+        
+        .claim-section {
+            margin-top: 24px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .claim-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .claim-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        .claim-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #f97316;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .claim-btn:hover { background: #ea580c; }
+        
+        .not-found {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .not-found h1 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        .not-found p {
+            color: #666;
+            margin-bottom: 24px;
+        }
+        .not-found a {
+            color: #f97316;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        footer {
+            background: white;
+            border-top: 1px solid #e5e5e5;
+            padding: 20px 24px;
+            margin-top: auto;
+        }
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: #666; text-decoration: none; }
+        .footer-links a:hover { color: #f97316; }
+        
+        @media (max-width: 768px) {
+            .profile-body { grid-template-columns: 1fr; }
+            .contact-section { border-right: none; border-bottom: 1px solid #e5e5e5; }
+            .profile-title { flex-direction: column; align-items: flex-start; }
+            nav a:not(.nav-cta) { display: none; }
+            .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">US <span>Drone Map</span></a>
+            <nav>
+                <a href="index.html">Map</a>
+                <a href="directory.html">Directory</a>
+                <a href="join.html" class="nav-cta">List Your Service</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <button class="back-link" onclick="goBack()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Back to Directory
+        </button>
+        
+        <div id="content">
+            <div class="not-found">
+                <h1>Loading...</h1>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-inner">
+            <div>© 2025 US Drone Map</div>
+            <div class="footer-links">
+                <a href="index.html">Map</a>
+                <a href="directory.html">Directory</a>
+                <a href="join.html">List Your Service</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="/cdn-cgi/l/email-protection#b9dad6d7cdd8dacdf9cccaddcbd6d7dcd4d8c997dad6d4">Contact</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smart back navigation - preserves filters
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'directory.html';
+            }
+        }
+        
+        // Decode obfuscated data
+        function decodeData(encoded) {
+            if (!encoded) return '';
+            try {
+                return atob(encoded);
+            } catch(e) {
+                return encoded;
+            }
+        }
+        
+        function transformPilot(p) {
+            return {
+                verified: p.v === true,
+                industry: p.i || '',
+                latitude: p.la,
+                longitude: p.lo,
+                company: p.c || 'Unknown',
+                city: p.ct || '',
+                state: p.st || '',
+                phoneEncoded: p.pe || '',
+                emailEncoded: p.ee || '',
+                phone: p.p || '',
+                email: p.e || '',
+                website: p.w || '',
+                model: p.m || '',
+                manufacturer: p.mf || '',
+                fleet: p.f || ''
+            };
+        }
+        
+        function slugify(text) {
+            return (text || '').toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+        }
+        
+        function formatPhone(phone) {
+            if (!phone) return '';
+            const digits = phone.replace(/\D/g, '');
+            if (digits.length === 10) {
+                return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+            }
+            return phone;
+        }
+        
+        function updateSchema(p) {
+            const phone = p.phoneEncoded ? decodeData(p.phoneEncoded) : p.phone;
+            const email = p.emailEncoded ? decodeData(p.emailEncoded) : p.email;
+            
+            const schema = {
+                "@context": "https://schema.org",
+                "@type": "LocalBusiness",
+                "name": p.company,
+                "description": `Professional drone services - ${p.industry || 'Various services'}`,
+                "url": `https://usdronemap.com/pilot.html?id=${slugify(`${p.company}-${p.city}-${p.state}`)}`,
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": p.city,
+                    "addressRegion": p.state,
+                    "addressCountry": "US"
+                }
+            };
+            
+            if (p.latitude && p.longitude) {
+                schema.geo = {
+                    "@type": "GeoCoordinates",
+                    "latitude": p.latitude,
+                    "longitude": p.longitude
+                };
+            }
+            
+            if (p.verified && phone) {
+                schema.telephone = phone;
+            }
+            
+            if (p.verified && email) {
+                schema.email = email;
+            }
+            
+            if (p.verified && p.website) {
+                schema.sameAs = p.website.startsWith('http') ? p.website : `https://${p.website}`;
+            }
+            
+            document.getElementById('schema-jsonld').textContent = JSON.stringify(schema);
+        }
+        
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            
+            if (!id) {
+                showNotFound();
+                return;
+            }
+            
+            try {
+                const version = '20250105';
+                const res = await fetch(`pilots.json?v=${version}`);
+                const rawData = await res.json();
+                // Handle both array format and object format with pilots property
+                const pilotsArray = Array.isArray(rawData) ? rawData : (rawData.pilots || []);
+                const pilots = pilotsArray.map(transformPilot);
+                
+                const pilot = pilots.find(p => slugify(`${p.company}-${p.city}-${p.state}`) === id);
+                
+                if (!pilot) {
+                    showNotFound();
+                    return;
+                }
+                
+                // Update page meta
+                document.title = `${pilot.company} - Drone Pilot | US Drone Map`;
+                updateSchema(pilot);
+                
+                renderProfile(pilot);
+                
+                // Track this view and update display
+                const pilotSlug = slugify(`${pilot.company}-${pilot.city}-${pilot.state}`);
+                trackView(pilotSlug);
+                updateViewDisplay(pilotSlug, pilot.verified);
+                
+            } catch (err) {
+                console.error('Error:', err);
+                showNotFound();
+            }
+        }
+        
+        function showNotFound() {
+            document.getElementById('content').innerHTML = `
+                <div class="not-found">
+                    <h1>Pilot Not Found</h1>
+                    <p>The pilot profile you're looking for doesn't exist or has been removed.</p>
+                    <a href="directory.html">Browse Directory</a>
+                </div>
+            `;
+        }
+        
+        function renderProfile(p) {
+            const phone = p.phoneEncoded ? decodeData(p.phoneEncoded) : p.phone;
+            const email = p.emailEncoded ? decodeData(p.emailEncoded) : p.email;
+            const hasContact = phone || email || p.website;
+            const slug = slugify(`${p.company}-${p.city}-${p.state}`);
+            
+            let contactHTML = '';
+            
+            if (p.verified && hasContact) {
+                // Show contact info for verified pilots
+                if (phone) {
+                    contactHTML += `
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-label">Phone</div>
+                                <div class="contact-value"><a href="tel:${phone}">${formatPhone(phone)}</a></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                if (email) {
+                    contactHTML += `
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value"><a href="mailto:${email}">${email}</a></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                if (p.website) {
+                    const url = p.website.startsWith('http') ? p.website : `https://${p.website}`;
+                    contactHTML += `
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                                </svg>
+                            </div>
+                            <div class="contact-info">
+                                <div class="contact-label">Website</div>
+                                <div class="contact-value"><a href="${url}" target="_blank">${p.website}</a></div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } else if (!p.verified) {
+                // Show "claim to reveal" for unverified
+                contactHTML = `
+                    <div class="reveal-contact-section">
+                        <div class="reveal-contact-title">🔒 Contact Info Hidden</div>
+                        <div class="reveal-contact-text">This listing hasn't been claimed yet. Claim it to display your contact information and get verified.</div>
+                        <a href="join.html?claim=${slug}&company=${encodeURIComponent(p.company)}" class="reveal-contact-btn">Claim This Listing</a>
+                    </div>
+                `;
+            } else {
+                contactHTML = '<div class="no-contact">No contact information available</div>';
+            }
+            
+            let equipmentHTML = '';
+            if (p.model) {
+                equipmentHTML += `
+                    <div class="equipment-item">
+                        <div class="equipment-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <div class="equipment-label">Drone Model(s)</div>
+                            <div class="equipment-value">${p.model.replace(/;/g, ', ')}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            if (p.manufacturer) {
+                equipmentHTML += `
+                    <div class="equipment-item">
+                        <div class="equipment-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <div class="equipment-label">Manufacturer</div>
+                            <div class="equipment-value">${p.manufacturer.replace(/;/g, ', ')}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            if (p.fleet) {
+                equipmentHTML += `
+                    <div class="equipment-item">
+                        <div class="equipment-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+                            </svg>
+                        </div>
+                        <div class="contact-info">
+                            <div class="equipment-label">Fleet Size</div>
+                            <div class="equipment-value">${p.fleet} drone${p.fleet !== '1' ? 's' : ''}</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (!equipmentHTML) {
+                equipmentHTML = '<div class="no-contact">No equipment information available</div>';
+            }
+            
+            document.getElementById('content').innerHTML = `
+                <div class="profile-card ${p.verified ? 'is-verified' : ''}">
+                    <div class="profile-header">
+                        <div class="profile-title">
+                            <h1 class="profile-name">${p.company}</h1>
+                            ${p.verified ? '<span class="verified-badge">VERIFIED</span>' : '<span class="unverified-badge">Unverified</span>'}
+                        </div>
+                        <div class="profile-location">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            </svg>
+                            ${p.city}${p.city && p.state ? ', ' : ''}${p.state}
+                        </div>
+                        ${p.industry ? `<div class="profile-industry">${p.industry}</div>` : ''}
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item verified-only">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                <span id="view-count"><span class="stat-value">--</span> views this month</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-body">
+                        <div class="contact-section">
+                            <div class="section-title">Contact Information</div>
+                            ${contactHTML}
+                        </div>
+                        <div class="equipment-section">
+                            <div class="section-title">Equipment</div>
+                            ${equipmentHTML}
+                        </div>
+                    </div>
+                    
+                    ${p.latitude && p.longitude ? `
+                        <div class="map-section">
+                            <div id="map"></div>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                ${!p.verified ? `
+                    <div class="claim-section">
+                        <div class="claim-title">Is this your business?</div>
+                        <p class="claim-text">Claim this listing to add your contact information, update your profile, and get the verified badge that builds trust with customers.</p>
+                        <a href="join.html?claim=${slug}&company=${encodeURIComponent(p.company)}" class="claim-btn">Claim This Listing</a>
+                    </div>
+                ` : ''}
+            `;
+            
+            // Initialize map if coordinates exist
+            if (p.latitude && p.longitude) {
+                setTimeout(() => {
+                    const map = L.map('map').setView([p.latitude, p.longitude], 12);
+                    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                        attribution: '© CARTO',
+                        maxZoom: 19
+                    }).addTo(map);
+                    
+                    L.marker([p.latitude, p.longitude], {
+                        icon: L.divIcon({
+                            className: 'marker',
+                            html: `<div style="
+                                width: ${p.verified ? 20 : 14}px;
+                                height: ${p.verified ? 20 : 14}px;
+                                background: ${p.verified ? '#f97316' : '#737373'};
+                                border-radius: 50%;
+                                border: 3px solid white;
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                            "></div>`,
+                            iconSize: [p.verified ? 20 : 14, p.verified ? 20 : 14],
+                            iconAnchor: [p.verified ? 10 : 7, p.verified ? 10 : 7]
+                        })
+                    }).addTo(map);
+                }, 100);
+            }
+        }
+        
+        // ============================================
+        // VIEW COUNTER - Supabase Integration
+        // ============================================
+        // 
+        // To enable view tracking:
+        // 1. Create free Supabase account at supabase.com
+        // 2. Create table 'profile_views' with columns:
+        //    - id (int8, primary key, auto-increment)
+        //    - pilot_id (text)
+        //    - viewed_at (timestamptz, default now())
+        //    - visitor_hash (text, optional for unique tracking)
+        // 3. Replace SUPABASE_URL and SUPABASE_ANON_KEY below
+        // 4. Enable RLS policy: allow INSERT for anon, SELECT for anon
+        //
+        // SQL to create table:
+        // CREATE TABLE profile_views (
+        //   id BIGSERIAL PRIMARY KEY,
+        //   pilot_id TEXT NOT NULL,
+        //   viewed_at TIMESTAMPTZ DEFAULT NOW(),
+        //   visitor_hash TEXT
+        // );
+        // CREATE INDEX idx_views_pilot ON profile_views(pilot_id);
+        // CREATE INDEX idx_views_date ON profile_views(viewed_at);
+        
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL'; // e.g., 'https://xxxxx.supabase.co'
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        // Simple hash for visitor deduplication (not tracking, just counts)
+        async function getVisitorHash() {
+            const data = navigator.userAgent + screen.width + screen.height + new Date().toDateString();
+            const encoder = new TextEncoder();
+            const hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(data));
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.slice(0, 8).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        
+        async function trackView(pilotId) {
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+                console.log('View tracking not configured. Set SUPABASE_URL and SUPABASE_ANON_KEY.');
+                return;
+            }
+            
+            try {
+                const visitorHash = await getVisitorHash();
+                
+                await fetch(`${SUPABASE_URL}/rest/v1/profile_views`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({
+                        pilot_id: pilotId,
+                        visitor_hash: visitorHash
+                    })
+                });
+            } catch (err) {
+                console.log('View tracking error:', err);
+            }
+        }
+        
+        async function getViewCount(pilotId) {
+            if (SUPABASE_URL === 'YOUR_SUPABASE_URL') {
+                return null;
+            }
+            
+            try {
+                // Get views from last 30 days
+                const thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                
+                const res = await fetch(
+                    `${SUPABASE_URL}/rest/v1/profile_views?pilot_id=eq.${pilotId}&viewed_at=gte.${thirtyDaysAgo.toISOString()}&select=id`,
+                    {
+                        headers: {
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                            'Prefer': 'count=exact'
+                        }
+                    }
+                );
+                
+                const count = res.headers.get('content-range');
+                if (count) {
+                    const total = count.split('/')[1];
+                    return parseInt(total) || 0;
+                }
+                return 0;
+            } catch (err) {
+                console.log('View count error:', err);
+                return null;
+            }
+        }
+        
+        async function updateViewDisplay(pilotId, isVerified) {
+            if (!isVerified) return;
+            
+            const count = await getViewCount(pilotId);
+            const viewCountEl = document.getElementById('view-count');
+            
+            if (viewCountEl && count !== null) {
+                viewCountEl.innerHTML = `<sp

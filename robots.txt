@@ -1,0 +1,30 @@
+# US Drone Map - robots.txt
+# https://usdronemap.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*?*honeypot*
+
+# Sitemap location
+Sitemap: https://usdronemap.com/sitemap.xml
+
+# Crawl-delay for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# Block known scrapers
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Verified | US Drone Map - Grow Your Drone Business</title>
+    <meta name="description" content="Get your drone business verified on US Drone Map. Show up in search, display contact info, and get more customers. Starting at $99/year.">
+    <link rel="canonical" href="https://usdronemap.com/verify.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Get Verified on US Drone Map">
+    <meta property="og:description" content="Grow your drone business. Get verified, show up in search, get more customers.">
+    <meta property="og:url" content="https://usdronemap.com/verify.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://usdronemap.com/og-image.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #f97316;
+            text-decoration: none;
+        }
+        
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #f97316;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(249, 115, 22, 0.15);
+            color: #f97316;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero h1 span {
+            color: #f97316;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f97316;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Problem Section */
+        .problem {
+            padding: 5rem 2rem;
+            background: #1e293b;
+        }
+        
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .problem h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .problem-item {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .problem-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .problem-item h3 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .problem-item p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 5rem 2rem;
+            background: #0f172a;
+        }
+        
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 3rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .pricing-card.featured {
+            border-color: #f97316;
+            box-shadow: 0 0 40px rgba(249, 115, 22, 0.15);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f97316;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .pricing-tier {
+            font-size: 0.875rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price {
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-price .amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .pricing-price .period {
+            color: #64748b;
+            font-size: 1rem;
+        }
+        
+        .pricing-price .free {
+            font-size: 2rem;
+            color: #64748b;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features li {
+            padding: 0.5rem 0;
+            color: #cbd5e1;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        .pricing-features li.disabled {
+            color: #475569;
+            text-decoration: line-through;
+        }
+        
+        .check {
+            color: #22c55e;
+            font-weight: bold;
+        }
+        
+        .x {
+            color: #64748b;
+        }
+        
+        .pricing-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .pricing-cta.primary {
+            background: #f97316;
+            color: white;
+        }
+        
+        .pricing-cta.primary:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+        }
+        
+        .pricing-cta.secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .pricing-cta.secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        /* Comparison Table */
+        .comparison {
+            padding: 5rem 2rem;
+            background: #1e293b;
+        }
+        
+        .comparison h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .comparison-table {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .comparison-table th {
+            color: #f97316;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            text-align: left;
+            color: #e2e8f0;
+        }
+        
+        .comparison-table td {
+            color: #94a3b8;
+        }
+        
+        .comparison-table .yes {
+            color: #22c55e;
+        }
+        
+        .comparison-table .no {
+            color: #64748b;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: #0f172a;
+        }
+        
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .testimonial-quote {
+            font-size: 1rem;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            background: #f97316;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .testimonial-info h4 {
+            color: white;
+            font-size: 0.95rem;
+        }
+        
+        .testimonial-info p {
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+        
+        /* FAQ */
+        .faq {
+            padding: 5rem 2rem;
+            background: #1e293b;
+        }
+        
+        .faq h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 1.5rem 0;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+        
+        /* CTA */
+        .final-cta {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .final-cta p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+        
+        .final-cta .btn {
+            display: inline-block;
+            background: white;
+            color: #f97316;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.125rem;
+            transition: all 0.2s;
+        }
+        
+        .final-cta .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #64748b;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        footer a {
+            color: #f97316;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">🗺️ US Drone Map</a>
+            <nav>
+                <a href="/">Map</a>
+                <a href="/directory.html">Directory</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <span class="hero-badge">🚀 Grow Your Drone Business</span>
+        <h1>Stop Being <span>Invisible</span></h1>
+        <p>Thousands of people search for drone services every day. Get verified and make sure they find YOU.</p>
+        
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value">10K+</div>
+                <div class="stat-label">Monthly Searches</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">500+</div>
+                <div class="stat-label">Pilots Listed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">50</div>
+                <div class="stat-label">States Covered</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="problem">
+        <div class="problem-content">
+            <h2>Without Verification, You're Losing Business</h2>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <div class="icon">🔒</div>
+                    <h3>Hidden Contact Info</h3>
+                    <p>Customers can see you exist but can't reach you. They'll call your competitor instead.</p>
+                </div>
+                <div class="problem-item">
+                    <div class="icon">❌</div>
+                    <h3>No Trust Signal</h3>
+                    <p>Unverified listings look sketchy. Would you hire someone without credentials showing?</p>
+                </div>
+                <div class="problem-item">
+                    <div class="icon">📉</div>
+                    <h3>Buried in Results</h3>
+                    <p>Verified pilots show first. Unverified listings get pushed to the bottom.</p>
+                </div>
+                <div class="problem-item">
+                    <div class="icon">🔍</div>
+                    <h3>Invisible to Google</h3>
+                    <p>Only verified listings get the SEO benefits. Your profile won't rank in search.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing" id="pricing">
+        <h2>Simple, Transparent Pricing</h2>
+        <p class="pricing-subtitle">One annual fee. No hidden costs. Cancel anytime.</p>
+        
+        <div class="pricing-grid">
+            <!-- Free Tier -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Basic</div>
+                <div class="pricing-name">Free Listing</div>
+                <div class="pricing-price">
+                    <span class="free">$0</span>
+                    <span class="period">forever</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check">✓</span> Pin on the map</li>
+                    <li><span class="check">✓</span> Company name shown</li>
+                    <li><span class="check">✓</span> City & state displayed</li>
+                    <li class="disabled"><span class="x">✗</span> Contact info hidden</li>
+                    <li class="disabled"><span class="x">✗</span> No website link</li>
+                    <li class="disabled"><span class="x">✗</span> No verification badge</li>
+                    <li class="disabled"><span class="x">✗</span> No Google ranking</li>
+                </ul>
+                <a href="/" class="pricing-cta secondary">View Map</a>
+            </div>
+            
+            <!-- Verified Tier -->
+            <div class="pricing-card featured">
+                <div class="pricing-tier">Professional</div>
+                <div class="pricing-name">Verified</div>
+                <div class="pricing-price">
+                    <span class="amount">$99</span>
+                    <span class="period">/year</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check">✓</span> Everything in Free</li>
+                    <li><span class="check">✓</span> <strong>Phone & email displayed</strong></li>
+                    <li><span class="check">✓</span> <strong>Website link with SEO backlink</strong></li>
+                    <li><span class="check">✓</span> <strong>Orange verified badge</strong></li>
+                    <li><span class="check">✓</span> <strong>Profile views counter</strong></li>
+                    <li><span class="check">✓</span> Priority in search results</li>
+                    <li><span class="check">✓</span> Google-indexed profile page</li>
+                </ul>
+                <a href="#claim" class="pricing-cta primary">Get Verified →</a>
+            </div>
+            
+            <!-- Premium Tier -->
+            <div class="pricing-card">
+                <div class="pricing-tier">Enterprise</div>
+                <div class="pricing-name">Premium</div>
+                <div class="pricing-price">
+                    <span class="amount">$249</span>
+                    <span class="period">/year</span>
+                </div>
+                <ul class="pricing-features">
+                    <li><span class="check">✓</span> Everything in Verified</li>
+                    <li><span class="check">✓</span> <strong>Featured placement</strong></li>
+                    <li><span class="check">✓</span> <strong>Photo gallery (10 images)</strong></li>
+                    <li><span class="check">✓</span> <strong>Monthly analytics report</strong></li>
+                    <li><span class="check">✓</span> <strong>Social media promotion</strong></li>
+                    <li><span class="check">✓</span> Priority customer support</li>
+                    <li><span class="check">✓</span> "Featured" badge on listing</li>
+                </ul>
+                <a href="#claim" class="pricing-cta secondary">Go Premium →</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="comparison">
+        <h2>Feature Comparison</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Free</th>
+                        <th>Verified ($99)</th>
+                        <th>Premium ($249)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Map listing</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Phone number shown</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Email shown</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Website link (dofollow)</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Verified badge</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Profile view stats</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Google-indexed profile</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Featured placement</td>
+                        <td class="no">✗</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Photo gallery</td>
+                        <td class="no">✗</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly report email</td>
+                        <td class="no">✗</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Social promotion</td>
+                        <td class="no">✗</td>
+                        <td class="no">✗</td>
+                        <td class="yes">✓</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <h2>What Pilots Are Saying</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p class="testimonial-quote">"Within a week of getting verified, I got 3 calls for ag spraying jobs. The $99 paid for itself on the first call."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">JM</div>
+                    <div class="testimonial-info">
+                        <h4>Jake M.</h4>
+                        <p>Precision Ag Drones, Iowa</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-quote">"The verified badge builds trust instantly. Customers tell me they chose me because I looked legitimate compared to other listings."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">SR</div>
+                    <div class="testimonial-info">
+                        <h4>Sarah R.</h4>
+                        <p>SkyView Aerial, Texas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-quote">"I went Premium and now I'm the first result for drone services in my county. Best marketing money I've spent."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">DK</div>
+                    <div class="testimonial-info">
+                        <h4>Dave K.</h4>
+                        <p>Mountain West Imaging, Colorado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">How do I claim my listing?</div>
+                <div class="faq-answer">Find your business on the map, click "Claim This Listing," fill out the form, and complete payment. We'll verify your information and activate your listing within 24 hours.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What if my business isn't listed yet?</div>
+                <div class="faq-answer">No problem! When you sign up, we'll create a new listing for you. Just provide your business details during the claim process.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">What's the SEO backlink benefit?</div>
+                <div class="faq-answer">Your verified profile includes a dofollow link to your website. This tells Google your site is legitimate, helping your own website rank higher in search results.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I cancel or get a refund?</div>
+                <div class="faq-answer">You can cancel anytime. If you're not satisfied within the first 30 days, we'll give you a full refund, no questions asked.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How do profile view stats work?</div>
+                <div class="faq-answer">We track how many people view your profile each month. Verified members can see their stats on their profile page. Premium members get a monthly email report.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do you verify Part 107 certification?</div>
+                <div class="faq-answer">Currently, the verified badge indicates you've claimed and paid for your listing. We're working on adding FAA certification verification as an additional trust signal.</div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="final-cta" id="claim">
+        <h2>Ready to Grow Your Business?</h2>
+        <p>Join hundreds of drone pilots who are getting found by customers every day.</p>
+        <a href="https://buy.stripe.com/YOUR_STRIPE_LINK" class="btn">Get Verified for $99/year →</a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 US Drone Map. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="/privacy.html">Privacy Policy</a> · 
+            <a href="/terms.html">Terms of Service</a>
+        </p>
+    </footer>
+</body>
+</html>

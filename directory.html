@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Drone Pilot Directory - Find Drone Services in All 50 States | US Drone Map</title>
+    <meta name="description" content="Browse 4,500+ professional drone pilots across America. Filter by state, service type, and verification status. Agriculture, game recovery, surveying & more.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://usdronemap.com/directory.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://usdronemap.com/directory.html">
+    <meta property="og:title" content="Drone Pilot Directory - All 50 States | US Drone Map">
+    <meta property="og:description" content="Browse 4,500+ professional drone pilots across America. Filter by state, service type, and verification status.">
+    <meta property="og:image" content="https://usdronemap.com/og-image.png">
+    <meta property="og:site_name" content="US Drone Map">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drone Pilot Directory - All 50 States | US Drone Map">
+    <meta name="twitter:description" content="Browse 4,500+ professional drone pilots across America.">
+    <meta name="twitter:image" content="https://usdronemap.com/og-image.png">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "US Drone Pilot Directory",
+        "description": "Professional drone service providers across America",
+        "url": "https://usdronemap.com/directory.html",
+        "numberOfItems": 4500,
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Agriculture Drone Services"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Game Recovery Drone Services"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Inspection Drone Services"
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Survey/Engineering Drone Services"
+            }
+        ]
+    }
+    </script>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23f97316'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 14px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .logo span { color: #f97316; }
+        nav { display: flex; gap: 8px; }
+        nav a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: #1a1a1a; background: #f5f5f5; }
+        nav a.active { color: #f97316; background: #fff7ed; }
+        .nav-cta {
+            background: #f97316 !important;
+            color: white !important;
+        }
+        .nav-cta:hover { background: #ea580c !important; }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+        
+        .filters {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            border: 1px solid #e5e5e5;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .filter-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+        }
+        .filter-group input,
+        .filter-group select {
+            padding: 10px 14px;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            background: #fafafa;
+            color: #1a1a1a;
+            min-width: 180px;
+        }
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: #f97316;
+            background: white;
+        }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: auto;
+        }
+        .toggle-group span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #d4d4d4;
+            border-radius: 26px;
+            transition: 0.3s;
+        }
+        .toggle-slider:before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .toggle-switch input:checked + .toggle-slider { background: #f97316; }
+        .toggle-switch input:checked + .toggle-slider:before { transform: translateX(22px); }
+        
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .results-count {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .results-count span { color: #f97316; }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border: 1px solid #e5e5e5;
+        }
+        .card:hover {
+            border-color: #f97316;
+            box-shadow: 0 4px 12px rgba(249,115,22,0.1);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .card-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+        .verified-badge {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            background: #f97316;
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .card-location {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        .card-industry {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: #f5f5f5;
+            color: #555;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        .card-contact {
+            font-size: 0.8rem;
+            color: #666;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 12px;
+        }
+        .card-contact a {
+            color: #f97316;
+            text-decoration: none;
+        }
+        .card-contact a:hover { text-decoration: underline; }
+        .card-contact-locked {
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 12px;
+            font-style: italic;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+        .pagination button {
+            padding: 10px 16px;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            background: white;
+            color: #1a1a1a;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pagination button:hover:not(:disabled) {
+            border-color: #f97316;
+            color: #f97316;
+        }
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .pagination button.active {
+            background: #f97316;
+            color: white;
+            border-color: #f97316;
+        }
+        .pagination .page-info {
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background: white;
+            border-top: 1px solid #e5e5e5;
+            padding: 20px 24px;
+            margin-top: auto;
+        }
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: #666; text-decoration: none; }
+        .footer-links a:hover { color: #f97316; }
+        
+        @media (max-width: 768px) {
+            .filters { flex-direction: column; align-items: stretch; }
+            .filter-group input,
+            .filter-group select { min-width: 100%; }
+            .toggle-group { margin-left: 0; justify-content: space-between; }
+            .grid { grid-template-columns: 1fr; }
+            nav a:not(.nav-cta) { display: none; }
+            .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">US <span>Drone Map</span></a>
+            <nav>
+                <a href="index.html">Map</a>
+                <a href="directory.html" class="active">Directory</a>
+                <a href="join.html" class="nav-cta">List Your Service</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <h1>Drone Pilot Directory</h1>
+        <p class="subtitle">Browse all drone service providers across America</p>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label>Search</label>
+                <input type="text" id="searchInput" placeholder="Company, city, state...">
+            </div>
+            <div class="filter-group">
+                <label>State</label>
+                <select id="stateFilter">
+                    <option value="">All States</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Service</label>
+                <select id="serviceFilter">
+                    <option value="">All Services</option>
+                    <option value="Agriculture">Agriculture</option>
+                    <option value="Game Recovery">Game Recovery</option>
+                    <option value="Inspection">Inspection</option>
+                    <option value="Survey/Engineering">Survey/Engineering</option>
+                    <option value="Government">Government</option>
+                    <option value="University">University</option>
+                    <option value="Defense">Defense</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="toggle-group">
+                <span>Verified Only</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="verifiedToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="results-info">
+            <div class="results-count">Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> pilots</div>
+        </div>
+        
+        <div class="grid" id="resultsGrid"></div>
+        
+        <div class="pagination" id="pagination"></div>
+    </main>
+    
+    <footer>
+        <div class="footer-inner">
+            <div>© 2025 US Drone Map</div>
+            <div class="footer-links">
+                <a href="index.html">Map</a>
+                <a href="directory.html">Directory</a>
+                <a href="join.html">List Your Service</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="/cdn-cgi/l/email-protection#791a16170d181a0d390c0a1d0b16171c141809571a1614">Contact</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        let allPilots = [];
+        let filteredPilots = [];
+        let currentPage = 1;
+        const perPage = 24;
+        
+        // Decode obfuscated data
+        function decodeData(encoded) {
+            if (!encoded) return '';
+            try {
+                return atob(encoded);
+            } catch(e) {
+                return encoded;
+            }
+        }
+        
+        function transformPilot(p) {
+            return {
+                verified: p.v === true,
+                industry: p.i || '',
+                latitude: p.la,
+                longitude: p.lo,
+                company: p.c || 'Unknown',
+                city: p.ct || '',
+                state: p.st || '',
+                phoneEncoded: p.pe || '',
+                emailEncoded: p.ee || '',
+                phone: p.p || '',
+                email: p.e || '',
+                website: p.w || '',
+                model: p.m || '',
+                manufacturer: p.mf || '',
+                fleet: p.f || ''
+            };
+        }
+        
+        function slugify(text) {
+            return (text || '').toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+        }
+        
+        function formatPhone(phone) {
+            if (!phone) return '';
+            const digits = phone.replace(/\D/g, '');
+            if (digits.length === 10) {
+                return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+            }
+            return phone;
+        }
+        
+        function filterPilots() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const state = document.getElementById('stateFilter').value;
+            const service = document.getElementById('serviceFilter').value;
+            const verifiedOnly = document.getElementById('verifiedToggle').checked;
+            
+            filteredPilots = allPilots.filter(p => {
+                if (verifiedOnly && !p.verified) return false;
+                if (state && p.state !== state) return false;
+                if (service && !p.industry.includes(service)) return false;
+                if (query) {
+                    const str = `${p.company} ${p.city} ${p.state}`.toLowerCase();
+                    if (!str.includes(query)) return false;
+                }
+                return true;
+            });
+            
+            currentPage = 1;
+            renderResults();
+        }
+        
+        function renderResults() {
+            const grid = document.getElementById('resultsGrid');
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const display = filteredPilots.slice(start, end);
+            
+            grid.innerHTML = display.map(p => {
+                const slug = slugify(`${p.company}-${p.city}-${p.state}`);
+                
+                // Only show contact info for verified pilots
+                let contactInfo = '';
+                if (p.verified) {
+                    const phone = p.phoneEncoded ? decodeData(p.phoneEncoded) : p.phone;
+                    const email = p.emailEncoded ? decodeData(p.emailEncoded) : p.email;
+                    
+                    if (phone) contactInfo = `<a href="tel:${phone}">${formatPhone(phone)}</a>`;
+                    else if (email) contactInfo = `<a href="mailto:${email}">${email}</a>`;
+                    else if (p.website) contactInfo = `<a href="https://${p.website}" target="_blank">${p.website}</a>`;
+                }
+                
+                const contactSection = p.verified && contactInfo 
+                    ? `<div class="card-contact">${contactInfo}</div>`
+                    : `<div class="card-contact-locked">🔒 Claim to show contact</div>`;
+                
+                return `
+                    <a href="pilot.html?id=${slug}" class="card">
+                        <div class="card-header">
+                            <div class="card-name">${p.company}</div>
+                            ${p.verified ? '<span class="verified-badge">VERIFIED</span>' : ''}
+                        </div>
+                        <div class="card-location">${p.city}${p.city && p.state ? ', ' : ''}${p.state}</div>
+                        ${p.industry ? `<div class="card-industry">${p.industry}</div>` : ''}
+                        ${contactSection}
+                    </a>
+                `;
+            }).join('');
+            
+            document.getElementById('showingCount').textContent = display.length;
+            document.getElementById('totalCount').textContent = filteredPilots.length.toLocaleString();
+            
+            renderPagination();
+        }
+        
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredPilots.length / perPage);
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            html += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>`;
+            html += `<span class="page-info">Page ${currentPage} of ${totalPages}</span>`;
+            html += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
+            
+            pagination.innerHTML = html;
+        }
+        
+        function goToPage(page) {
+            const totalPages = Math.ceil(filteredPilots.length / perPage);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderResults();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            
+            try {
+                // Cache busting
+                const version = '20250105';
+                const res = await fetch(`pilots.json?v=${version}`);
+                const rawData = await res.json();
+                allPilots = rawData.map(transformPilot);
+                
+                // Populate state dropdown
+                const states = [...new Set(allPilots.map(p => p.state).filter(Boolean))].sort();
+                const stateSelect = document.getElementById('stateFilter');
+                states.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = s;
+                    opt.textContent = s;
+                    stateSelect.appendChild(opt);
+                });
+                
+                // Apply URL params
+                if (params.get('search')) {
+                    document.getElementById('searchInput').value = params.get('search');
+                }
+                if (params.get('state')) {
+                    document.getElementById('stateFilter').value = params.get('state');
+                }
+                if (params.get('service')) {
+                    document.getElementById('serviceFilter').value = params.get('service');
+                }
+                
+                filterPilots();
+                
+                // Event listeners
+                document.getElementById('searchInput').addEventListener('input', filterPilots);
+                document.getElementById('stateFilter').addEventListener('change', filterPilots);
+                document.getElementById('serviceFilter').addEventListener('change', filterPilots);
+                document.getElementById('verifiedToggle').addEventListener('change', filterPilots);
+                
+            } catch (err) {
+                console.error('Error loading pilots:', err);
+                document.getElementById('resultsGrid').inn
